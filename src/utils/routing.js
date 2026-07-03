@@ -30,7 +30,9 @@ export function haversine(lat1, lng1, lat2, lng2) {
  */
 export function estimateTravelTime(distanceKm) {
   const avgSpeedKmh = 25;
-  return Math.round((distanceKm / avgSpeedKmh) * 60);
+  const calculatedTime = Math.round((distanceKm / avgSpeedKmh) * 60);
+  // Enforce a minimum travel time of 2 minutes to account for prep time/starting vehicle
+  return Math.max(2, calculatedTime);
 }
 
 /**
@@ -55,7 +57,9 @@ export function rankByDistance(facilityList, userLat, userLng) {
     .map((facility) => {
       const distance = haversine(userLat, userLng, facility.lat, facility.lng);
       const eta = estimateTravelTime(distance);
-      return { ...facility, distance: Math.round(distance * 10) / 10, eta };
+      // If distance is greater than 0, round to 1 decimal place but enforce at least 0.1 km
+      const roundedDistance = distance > 0 ? Math.max(0.1, Math.round(distance * 10) / 10) : 0;
+      return { ...facility, distance: roundedDistance, eta };
     })
     .sort((a, b) => a.distance - b.distance);
 }

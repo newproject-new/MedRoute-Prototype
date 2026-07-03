@@ -27,8 +27,9 @@ export default function FacilityDetail() {
   let distance = null;
   let eta = null;
   if (position) {
-    distance = Math.round(haversine(position.latitude, position.longitude, facility.lat, facility.lng) * 10) / 10;
-    eta = estimateTravelTime(distance);
+    const rawDistance = haversine(position.latitude, position.longitude, facility.lat, facility.lng);
+    distance = rawDistance > 0 ? Math.max(0.1, Math.round(rawDistance * 10) / 10) : 0;
+    eta = estimateTravelTime(rawDistance);
   }
 
   return (
