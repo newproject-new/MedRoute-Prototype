@@ -25,3 +25,5 @@ dist-ssr
 
 #project doc
 docs/
+deployment_guide.md
+git_deployment_commands.md

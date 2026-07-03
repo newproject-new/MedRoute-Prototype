@@ -41,7 +41,7 @@ export default function Facilities() {
     <div className="facilities-page">
       <div className="facilities-header">
         <h1>Healthcare Facilities</h1>
-        <p>Browse all {facilities.length} partner facilities across Lagos</p>
+        <p>Browse all {facilities.length} partner facilities across Akure & Ondo State</p>
       </div>
 
       <div className="facilities-filters">

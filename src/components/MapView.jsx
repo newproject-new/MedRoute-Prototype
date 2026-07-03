@@ -51,7 +51,7 @@ export default function MapView({
 
     const center = userPosition
       ? [userPosition.latitude, userPosition.longitude]
-      : [6.5244, 3.3792];
+      : [7.2526, 5.1931];
 
     const map = L.map(mapRef.current, {
       zoomControl: false,

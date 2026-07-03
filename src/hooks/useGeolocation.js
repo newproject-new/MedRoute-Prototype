@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 /**
  * MedRoute — Geolocation Hook
  * Wraps the browser Geolocation API.
- * Falls back to Lagos center (6.5244, 3.3792) if permission is denied.
+ * Falls back to Akure center (7.2526, 5.1931) if permission is denied.
  */
 
-const LAGOS_CENTER = { latitude: 6.5244, longitude: 3.3792 };
+const AKURE_CENTER = { latitude: 7.2526, longitude: 5.1931 };
 
 export default function useGeolocation() {
   const [position, setPosition] = useState(null);
@@ -16,7 +16,7 @@ export default function useGeolocation() {
   useEffect(() => {
     if (!navigator.geolocation) {
       setError('Geolocation is not supported by this browser.');
-      setPosition(LAGOS_CENTER);
+      setPosition(AKURE_CENTER);
       setLoading(false);
       return;
     }
@@ -32,7 +32,7 @@ export default function useGeolocation() {
     const onError = (err) => {
       console.warn('Geolocation error:', err.message);
       setError(err.message);
-      setPosition(LAGOS_CENTER);
+      setPosition(AKURE_CENTER);
       setLoading(false);
     };
 

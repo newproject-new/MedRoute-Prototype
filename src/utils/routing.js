@@ -25,7 +25,7 @@ export function haversine(lat1, lng1, lat2, lng2) {
 
 /**
  * Estimate travel time based on distance.
- * Uses a simple model: avg 25 km/h for Lagos traffic.
+ * Uses a simple model: avg 25 km/h for Akure traffic.
  * @returns {number} Estimated minutes.
  */
 export function estimateTravelTime(distanceKm) {
