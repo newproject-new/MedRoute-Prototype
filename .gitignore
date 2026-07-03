@@ -25,5 +25,3 @@ dist-ssr
 
 # Ignore Project Documents and Deployment Guides
 docs/
-deployment_guide.md
-git_deployment_commands.md
