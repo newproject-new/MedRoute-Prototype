@@ -70,12 +70,14 @@ export function getRecommendation(emergencyTypeId, userLat, userLng) {
   const rankedQualified = rankByDistance(qualified, userLat, userLng);
   const rankedAll = rankByDistance([...facilities], userLat, userLng);
 
-  if (rankedQualified.length > 0 && rankedQualified[0].distance <= MAX_REASONABLE_DISTANCE_KM) {
+  if (rankedQualified.length > 0) {
+    const isWithinRange = rankedQualified[0].distance <= MAX_REASONABLE_DISTANCE_KM;
     return {
       recommendation: rankedQualified[0],
-      alternatives: rankedQualified.slice(1).filter(f => f.distance <= MAX_REASONABLE_DISTANCE_KM),
+      // Provide closest qualified alternatives (up to 3)
+      alternatives: rankedQualified.slice(1, 4),
       totalQualified: rankedQualified.length,
-      outOfRangeFallback: false
+      outOfRangeFallback: !isWithinRange
     };
   } else {
     if (rankedAll.length === 0) {
@@ -85,7 +87,7 @@ export function getRecommendation(emergencyTypeId, userLat, userLng) {
     return {
       recommendation: rankedAll[0],
       alternatives: rankedAll.slice(1, 4),
-      totalQualified: rankedQualified.length,
+      totalQualified: 0,
       outOfRangeFallback: true
     };
   }
